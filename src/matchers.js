@@ -6,7 +6,8 @@ const debug = new Debugger("bot:matchers")
 const statistics = {
     kills: new SortedSet(),
     deaths: new SortedSet(),
-    shotLength: new SortedSet()
+    shotLength: new SortedSet(),
+    pointCaptures: new SortedSet()
 }
 let recording = false
 
@@ -38,6 +39,15 @@ export default optimize({
                         return "Ok."
                     }
                 }
+            },
+            {
+                names: ["forcerecord"],
+                handler: () => {
+                    if (data.username == "WesJD") {
+                        recording = true
+                        return "Ok."
+                    }
+                }
             }
         ],
         other: [
@@ -64,8 +74,16 @@ export default optimize({
             }
         },
         message => {
-            if (/^(.+) wins!$/.test(message)) {
-                if (recording) {
+            if (recording) {
+                const matches = /.+) captured (.+)/.exec(message)
+                if (matches && matches.length > 1) {
+                    statistics.pointCaptures.incrBy(1, matches[1])
+                }
+            }
+        },
+        message => {
+            if (recording) {
+                if (/^(.+) wins!$/.test(message)) {
                     let display = "What a match! "
                     {
                         const top = statistics.kills._tail
@@ -80,9 +98,15 @@ export default optimize({
                         display += `${top.key} died the most with ${top.value} deaths. `
                     }
 
+                    if (pointCaptures.length > 0) {
+                        const top = statistics.pointCaptures._last
+                        display += `${top.key} captured the most points with ${top.value} captures. `
+                    }
+
                     statistics.kills.empty()
                     statistics.shotLength.empty()
                     statistics.deaths.empty()
+                    statistics.pointCaptures.empty()
 
                     return display
                 }
