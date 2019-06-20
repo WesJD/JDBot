@@ -79,6 +79,11 @@ export default optimize({
                         const top = statistics.deaths._tail
                         display += `${top.key} died the most with ${top.value} deaths. `
                     }
+
+                    statistics.kills.empty()
+                    statistics.shotLength.empty()
+                    statistics.deaths.empty()
+
                     return display
                 }
             }
