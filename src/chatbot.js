@@ -15,7 +15,6 @@ export async function save(message) {
     if (!/[^a-zA-Z0-9,.\- !?_+%$#@=""]/.test(message)
         && sentiment.analyze(message).score >= 0) {
         await brain.addSentence(message)
-        await mysql.query("INSERT IGNORE INTO sentences (sentence) VALUES (?)", [message])
     }
 }
 
