@@ -35,7 +35,7 @@ function bindEvents() {
             if (data.isPM || data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
                 data.message = data.message.substring(bot.username.length).trim()
 
-                let prefix = "/g"
+                let prefix = "/g "
                 if (data.isTeamChat) {
                     prefix = ""
                 } else if (data.isPM) {
