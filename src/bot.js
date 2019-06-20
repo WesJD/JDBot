@@ -32,7 +32,7 @@ bot.on("message", chatMessage => {
         if (data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
             data.message = data.message.substring(bot.username.length).trim()
 
-            prefix = "/g"
+            let prefix = "/g"
             if (isTeamChat) {
                 prefix = ""
             } else if (isPM) {
