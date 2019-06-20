@@ -44,8 +44,6 @@ bot.on("message", chatMessage => {
             } else {
                 runMatchers(data, matchers.player.other, prefix).catch(err => debug("Couldn't run matchers", err))
             }
-        } else {
-            save(data.message).catch(err => debug("Couldn't save message", err))
         }
     } else {
         runMatchers(message, matchers.server, "/g ").catch(err => debug("Couldn't run matchers", err))
