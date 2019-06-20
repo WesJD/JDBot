@@ -42,7 +42,7 @@ export default optimize({
             },
             {
                 names: ["forcerecord"],
-                handler: () => {
+                handler: (data) => {
                     if (data.username == "WesJD") {
                         recording = true
                         return "Ok."
