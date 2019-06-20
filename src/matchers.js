@@ -99,7 +99,7 @@ export default optimize({
                     }
 
                     if (statistics.pointCaptures.length > 0) {
-                        const top = statistics.pointCaptures._last
+                        const top = statistics.pointCaptures._tail
                         display += `${top.key} captured the most points with ${top.value} captures. `
                     }
 
