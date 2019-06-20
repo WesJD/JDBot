@@ -9,7 +9,6 @@
         "debug": "^4.1.1",
         "keyword-extractor": "0.0.16",
         "mineflayer": "^2.9.0",
-        "mysql2": "^1.6.5",
         "node-brain": "^1.0.0",
         "redis-sorted-set": "^2.0.0",
         "sentiment": "^5.0.1"

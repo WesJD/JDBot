@@ -2,23 +2,13 @@ import { join } from "path"
 import keyword from "keyword-extractor"
 import Sentiment from "sentiment"
 import { Brain, FileSystemProvider } from "node-brain/lib/node-brain"
-import config from "../config.json"
-import { createPool } from "mysql2/promise"
 
 const provider = new FileSystemProvider(join(__dirname, "..", "BRAIN"))
 const brain = new Brain({ provider })
 const sentiment = new Sentiment()
-let mysql
 
 export async function initialize() {
     await provider.initialize()
-
-    mysql = await createPool(config.mysql)
-    await mysql.query("CREATE TABLE IF NOT EXISTS sentences (sentence VARCHAR(100) NOT NULL, UNIQUE(sentence))")
-    const [rows] = await mysql.query("SELECT * FROM sentences")
-    for (const row of rows) {
-        await brain.addSentence(row.sentence)
-    }
 }
 
 export async function save(message) {
