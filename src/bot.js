@@ -20,10 +20,11 @@ bot.on("end", message => {
 
 bot.on("message", chatMessage => {
     const message = chatMessage.toString()
-    const matches = /(\(Team\)\ )?(\[.+\]\ )?<?\*?([a-zA-Z0-9_-]{3,15})>?:\ (.+)/.exec(message)
+    const matches = /(\(Team\)\ |\[PM\] From )?(\[.+\]\ )?<?\*?([a-zA-Z0-9_-]{3,15})>?:\ (.+)/.exec(message)
     if (matches && matches.length > 1) {
         const data = {
-            isTeamChat: matches[1] != undefined,
+            isTeamChat: matches[1] === "(Team)",
+            isPM: matches[1] === "[PM] From ",
             staffRank: matches[2],
             username: matches[3],
             message: matches[4]
@@ -31,7 +32,12 @@ bot.on("message", chatMessage => {
         if (data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
             data.message = data.message.substring(bot.username.length).trim()
 
-            const prefix = data.isTeamChat ? "" : "/g "
+            prefix = "/g"
+            if (isTeamChat) {
+                prefix = ""
+            } else if (isPM) {
+                prefix = "/msg " + data.username + " "
+            }
 
             const splits = data.message.split(" ")
             const command = matchers.player.command[splits[0]]
