@@ -29,7 +29,7 @@ bot.on("message", chatMessage => {
             username: matches[3],
             message: matches[4]
         }
-        if (data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
+        if (data.isPM || data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
             data.message = data.message.substring(bot.username.length).trim()
 
             let prefix = "/g"
