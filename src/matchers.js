@@ -75,7 +75,7 @@ export default optimize({
         },
         message => {
             if (recording) {
-                const matches = /.+) captured (.+)/.exec(message)
+                const matches = /(.+) captured (.+)/.exec(message)
                 if (matches && matches.length > 1) {
                     statistics.pointCaptures.incrBy(1, matches[1])
                 }
