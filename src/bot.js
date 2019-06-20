@@ -23,8 +23,8 @@ bot.on("message", chatMessage => {
     const matches = /(\(Team\)\ |\[PM\] From )?(\[.+\]\ )?<?\*?([a-zA-Z0-9_-]{3,15})>?:\ (.+)/.exec(message)
     if (matches && matches.length > 1) {
         const data = {
-            isTeamChat: matches[1] === "(Team)",
-            isPM: matches[1] === "[PM] From ",
+            isTeamChat: matches[1] == "(Team) ",
+            isPM: matches[1] == "[PM] From ",
             staffRank: matches[2],
             username: matches[3],
             message: matches[4]
