@@ -36,7 +36,7 @@ bot.on("message", chatMessage => {
             if (isTeamChat) {
                 prefix = ""
             } else if (isPM) {
-                prefix = "/msg " + data.username
+                prefix = "/msg " + data.username + " "
             }
 
             const splits = data.message.split(" ")
