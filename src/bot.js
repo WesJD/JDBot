@@ -33,9 +33,9 @@ bot.on("message", chatMessage => {
             data.message = data.message.substring(bot.username.length).trim()
 
             let prefix = "/g"
-            if (isTeamChat) {
+            if (data.isTeamChat) {
                 prefix = ""
-            } else if (isPM) {
+            } else if (data.isPM) {
                 prefix = "/msg " + data.username + " "
             }
 
