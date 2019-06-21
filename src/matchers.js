@@ -51,19 +51,22 @@ export default optimize({
             }
         ],
         other: [
-            async ({ message }) => {
-                try {
-                    await save(message)
-                } catch (e) {
-                    debug("Couldn't save message to brain", e)
-                }
+            // async ({ message }) => {
+            //     try {
+            //         await save(message)
+            //     } catch (e) {
+            //         debug("Couldn't save message to brain", e)
+            //     }
 
-                try {
-                    return await getResponse(message)
-                } catch (e) {
-                    debug("Couldn't generate new message", e)
-                    return "I don't know how to respond to that. Perhaps your statement is too short?"
-                }
+            //     try {
+            //         return await getResponse(message)
+            //     } catch (e) {
+            //         debug("Couldn't generate new message", e)
+            //         return "I don't know how to respond to that. Perhaps your statement is too short?"
+            //     }
+            // }
+            () => {
+                return "I can no longer respond to your messages."
             }
         ]
     },
