@@ -98,10 +98,10 @@ export default optimize({
                         display += `${top.key} died the most with ${top.value} deaths. `
                     }
 
-                    if (statistics.pointCaptures.length > 0) {
-                        const top = statistics.pointCaptures._tail
-                        display += `${top.key} captured the most points with ${top.value} captures. `
-                    }
+                    // if (statistics.pointCaptures.length > 0) {
+                    //     const top = statistics.pointCaptures._tail
+                    //     display += `${top.key} captured the most points with ${top.value} captures. `
+                    // }
 
                     statistics.kills.empty()
                     statistics.shotLength.empty()
