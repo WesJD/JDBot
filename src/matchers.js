@@ -131,7 +131,7 @@ export default optimize({
                         statistics.kills.incrBy(1, killer)
 
                         if (middle.toLowerCase().indexOf("shot") != -1) {
-                            const bowMatches = /^from (\d+) blocks$/.exec(end.trim())
+                            const bowMatches = /from (\d+) blocks/.exec(end.trim())
                             if (bowMatches && bowMatches.length > 1) {
                                 const distance = parseInt(bowMatches[1])
                                 if (distance > (statistics.shotLength.get(killer) || 0)) {
