@@ -127,18 +127,20 @@ export default optimize({
                     const killer = matches[2]
                     const end = matches[3]
 
-                    statistics.kills.incrBy(1, killer)
+                    if (player.username != killer) { //dont count if you killed yourself
+                        statistics.kills.incrBy(1, killer)
 
-                    if (middle.toLowerCase().indexOf("shot") != -1) {
-                        const bowMatches = /^from (\d+) blocks$/.exec(end.trim())
-                        if (bowMatches && bowMatches.length > 1) {
-                            const distance = parseInt(bowMatches[1])
-                            if (distance > (statistics.shotLength.get(killer) || 0)) {
-                                statistics.shotLength.set(killer, distance)
-                            }
+                        if (middle.toLowerCase().indexOf("shot") != -1) {
+                            const bowMatches = /^from (\d+) blocks$/.exec(end.trim())
+                            if (bowMatches && bowMatches.length > 1) {
+                                const distance = parseInt(bowMatches[1])
+                                if (distance > (statistics.shotLength.get(killer) || 0)) {
+                                    statistics.shotLength.set(killer, distance)
+                                }
 
-                            if (distance > 85) {
-                                return `Holy shot! ${killer} shot ${player.username} from ${distance} blocks!`
+                                if (distance > 85) {
+                                    return `Holy shot! ${killer} shot ${player.username} from ${distance} blocks!`
+                                }
                             }
                         }
                     }
