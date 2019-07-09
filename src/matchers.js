@@ -1,6 +1,5 @@
 import Debugger from "debug"
 import SortedSet from "redis-sorted-set"
-import { save, getResponse } from "./chatbot"
 
 const debug = new Debugger("bot:matchers")
 const statistics = {
