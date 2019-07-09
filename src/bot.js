@@ -2,12 +2,10 @@ import Debugger from "debug"
 import config from "../config.json"
 import { createBot } from "mineflayer"
 import matchers from "./matchers"
-import { initialize, save } from "./chatbot.js"
 
 const debug = new Debugger("bot:main")
 let bot = createBot(config.mineflayer)
 
-initialize().catch(err => debug("Couldn't start brain", err))
 bindEvents()
 
 function bindEvents() {
