@@ -146,6 +146,11 @@ export default optimize({
                     }
                 }
             }
+        },
+        message => {
+            if (message.toLowerCase().indexOf("bruh") != -1) {
+                return "BRUH ALARM SOUNDED"
+            }
         }
     ]
 })
