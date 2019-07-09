@@ -130,7 +130,7 @@ export default optimize({
                     if (player.username != killer) { //dont count if you killed yourself
                         statistics.kills.incrBy(1, killer)
 
-                        if (middle.toLowerCase().indexOf("shot") != -1) {
+                        if (middle.toLowerCase().indexOf("shot") != -1 || middle.toLowerCase().indexOf("sniped") != -1) {
                             const bowMatches = /from (\d+) blocks/.exec(end.trim())
                             if (bowMatches && bowMatches.length > 1) {
                                 const distance = parseInt(bowMatches[1])
