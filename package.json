@@ -7,10 +7,8 @@
         "babel-preset-env": "^1.7.0",
         "babel-register": "^6.26.0",
         "debug": "^4.1.1",
-        "keyword-extractor": "0.0.16",
         "mineflayer": "^2.9.0",
-        "node-brain": "^1.0.0",
         "redis-sorted-set": "^2.0.0",
-        "sentiment": "^5.0.1"
+        "sapcai": "^4.1.0"
     }
 }

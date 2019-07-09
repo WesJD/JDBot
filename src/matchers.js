@@ -1,6 +1,9 @@
 import Debugger from "debug"
 import SortedSet from "redis-sorted-set"
+import Sapcai from "sapcai"
+import config from "../config.json"
 
+const chatBot = new Sapcai.build(config.recastai.token, "en")
 const debug = new Debugger("bot:matchers")
 const statistics = {
     kills: new SortedSet(),
@@ -53,6 +56,15 @@ export default optimize({
             ({ message }) => {
                 if (message.toLowerCase().indexOf("bruh") != -1) {
                     return "BRUH ALARM SOUNDED"
+                }
+            },
+            async ({ username, message }) => {
+                try {
+                    const response = await chatBot.dialog({ type: "text", content: message }, { conversationId: username })
+                    return `${username}, ${response.messages[0].content.charAt(0).toLowerCase()}${response.messages[0].content.substring(1)}`
+                } catch (e) {
+                    debug("Couldn't get response to message", e)
+                    return "I had an error trying to process your message."
                 }
             }
         ]

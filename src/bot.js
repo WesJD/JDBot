@@ -21,10 +21,10 @@ function bindEvents() {
 
     bot.on("message", chatMessage => {
         const message = chatMessage.toString()
-        const matches = /(\(Team\)\ |\[PM\] From )?(\[.+\]\ )?<?\*?([a-zA-Z0-9_-]{3,15})>?:\ (.+)/.exec(message)
+        const matches = /((?:\(|\[)Team(?:\)|\]) |\[PM\] From )?(\[.+\] )?<?\*?([a-zA-Z0-9_-]{3,15})>?: (.+)/.exec(message)
         if (matches && matches.length > 1) {
             const data = {
-                isTeamChat: matches[1] == "(Team) ",
+                isTeamChat: matches[1] != undefined,
                 isPM: matches[1] == "[PM] From ",
                 staffRank: matches[2],
                 username: matches[3],

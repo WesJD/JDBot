@@ -3,5 +3,8 @@
         "username": "email",
         "password": "pass",
         "host": "play.stratus.network"
+    },
+    "recastai": {
+        "token": ""
     }
 }
