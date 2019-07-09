@@ -49,7 +49,13 @@ export default optimize({
                 }
             }
         ],
-        other: []
+        other: [
+            ({ message }) => {
+                if (message.toLowerCase().indexOf("bruh") != -1) {
+                    return "BRUH ALARM SOUNDED"
+                }
+            }
+        ]
     },
     server: [
         message => {
@@ -126,11 +132,6 @@ export default optimize({
                         }
                     }
                 }
-            }
-        },
-        message => {
-            if (message.toLowerCase().indexOf("bruh") != -1) {
-                return "BRUH ALARM SOUNDED"
             }
         }
     ]
