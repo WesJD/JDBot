@@ -3,6 +3,25 @@ import SortedSet from "redis-sorted-set"
 import Sapcai from "sapcai"
 import config from "../config.json"
 
+const endMessageBeginnings = [
+    "What a match!",
+    "Default dance!",
+    "Good job!",
+    "gg!",
+    "Great match!",
+    "Good game!",
+    "Nice match!",
+    "Great game!",
+    "Well played!",
+    "Nice job!",
+    "What a match!",
+    "Game over. The better team wins!",
+    "Victory Royale!",
+    "Stunning match!",
+    "Winner winner, chicken dinner!",
+    "Finally, an ending!",
+    "We're in the endgame now.",
+]
 const chatBot = new Sapcai.build(config.recastai.token, "en")
 const debug = new Debugger("bot:matchers")
 const statistics = {
@@ -86,7 +105,7 @@ export default optimize({
         message => {
             if (recording) {
                 if (/^(.+) wins!$/.test(message)) {
-                    let display = "What a match! "
+                    let display = `${endMessageBeginnings[Math.floor(Math.random() * endMessageBeginnings.length)]}`
                     {
                         const top = statistics.kills._tail
                         display += `${top.key} had the most kills with ${top.value} total. `
