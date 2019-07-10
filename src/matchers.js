@@ -77,13 +77,21 @@ export default optimize({
                     return "BRUH ALARM SOUNDED"
                 }
             },
-            async ({ username, message }) => {
-                try {
-                    const response = await chatBot.dialog({ type: "text", content: message }, { conversationId: username })
-                    return `${username}, ${response.messages[0].content.charAt(0).toLowerCase()}${response.messages[0].content.substring(1)}`
-                } catch (e) {
-                    debug("Couldn't get response to message", e)
-                    return "I had an error trying to process your message."
+            async ({ username, message, isTeamChat, isPM }, bot) => {
+                if (isTeamChat || isPM) {
+                    try {
+                        const response = (await chatBot.dialog({ type: "text", content: message }, { conversationId: username })).messages[0].content
+                        if (isPM) {
+                            return response
+                        } else {
+                            return `${username}, ${response}`
+                        }
+                    } catch (e) {
+                        debug("Couldn't get response to message", e)
+                        return "I had an error trying to process your message."
+                    }
+                } else {
+                    bot.chat(`/pm ${username} I can only converse with you in Observer team chat or /pm.`)
                 }
             }
         ]
