@@ -105,7 +105,7 @@ export default optimize({
         message => {
             if (recording) {
                 if (/^(.+) wins!$/.test(message)) {
-                    let display = `${endMessageBeginnings[Math.floor(Math.random() * endMessageBeginnings.length)]}`
+                    let display = `${endMessageBeginnings[Math.floor(Math.random() * endMessageBeginnings.length)]} `
                     {
                         const top = statistics.kills._tail
                         display += `${top.key} had the most kills with ${top.value} total. `
