@@ -73,17 +73,19 @@ export default optimize({
             },
             {
                 names: ["matchmessage", "matchmessage", "findsenders", "findmatches"],
-                handler: ({ message }) => {
-                    const senders = []
-                    for (const sender in lastMessage) {
-                        if (lastMessage[sender] == message) {
-                            senders.push(sender)
+                handler: ({ message, isPM }) => {
+                    if (isPM) {
+                        const senders = []
+                        for (const sender in lastMessage) {
+                            if (lastMessage[sender] == message) {
+                                senders.push(sender)
+                            }
                         }
-                    }
-                    if (senders.length > 0) {
-                        return senders.join(" ")
-                    } else {
-                        return "I didn't find anyone."
+                        if (senders.length > 0) {
+                            return senders.join(" ")
+                        } else {
+                            return "I didn't find anyone."
+                        }
                     }
                 }
             }
