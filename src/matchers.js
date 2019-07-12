@@ -23,6 +23,7 @@ const endMessageBeginnings = [
     "We're in the endgame now.",
 ]
 const chatBot = new Sapcai.build(config.recastai.token, "en")
+export const lastMessage = {}
 const debug = new Debugger("bot:matchers")
 const statistics = {
     kills: new SortedSet(),
@@ -67,6 +68,22 @@ export default optimize({
                     if (data.username == "WesJD") {
                         recording = true
                         return "Ok."
+                    }
+                }
+            },
+            {
+                names: ["matchmessage", "matchmessage", "findsenders", "findmatches"],
+                handler: ({ message }) => {
+                    const senders = []
+                    for (const sender in lastMessage) {
+                        if (lastMessage[sender] == message) {
+                            senders.push(sender)
+                        }
+                    }
+                    if (senders.length > 0) {
+                        return senders.join(" ")
+                    } else {
+                        return "I didn't find anyone."
                     }
                 }
             }

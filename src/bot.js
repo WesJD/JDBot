@@ -1,7 +1,7 @@
 import Debugger from "debug"
 import config from "../config.json"
 import { createBot } from "mineflayer"
-import matchers from "./matchers"
+import matchers, { lastMessage } from "./matchers"
 
 const debug = new Debugger("bot:main")
 let bot = createBot(config.mineflayer)
@@ -30,6 +30,7 @@ function bindEvents() {
                 username: matches[3],
                 message: matches[4]
             }
+            lastMessage[data.username] = data.message
             if (data.isPM || data.message.toLowerCase().startsWith(bot.username.toLowerCase())) {
                 if (!data.isPM) {
                     data.message = data.message.substring(bot.username.length).trim()
